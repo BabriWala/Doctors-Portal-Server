@@ -33,6 +33,7 @@ async function run(){
     try{
         const appointmentOptionCollection = client.db('doctorPortal').collection('appointmentOptions');
         const bookingsCollection = client.db('doctorPortal').collection('bookings');
+        const usersCollection = client.db('doctorPortal').collection('users');
 
         // Not Best Practice
         // Use aggregate to query multiple collection and  then merge data 
@@ -96,6 +97,12 @@ async function run(){
             }
             const result = await bookingsCollection.insertOne(booking);
             res.send(result);
+        });
+
+        app.post('/users', async(req, res)=>{
+            const user = req.body;
+            const result = await usersCollection.insertOne(user);
+            res.send(result);   
         })
 
     }
